@@ -43,13 +43,13 @@
 <h1><a name="synopsis">SYNOPSIS</a></h1>
 <pre>
 
-my $map = new SNMP::Map;
-$map-&gt;get_data(username=&gt; 'user',
+ my $map = new SNMP::Map;
+ $map-&gt;get_data(username=&gt; 'user',
                password =&gt;'pass',
                ipv3 =&gt; ['10.8.255.238','10.8.255.239','10.8.255.244','10.8.255.248'],
                vlan=&gt;'vlan-224'
-);
-$map-&gt;get_output(file =&gt; 'map.jpg');</pre>
+ );
+ $map-&gt;get_output(file =&gt; 'map.jpg');</pre>
 <p>
 </p>
 <hr />
@@ -67,14 +67,15 @@ javascript for popuping additional info.</p>
 </p>
 <h2><a name="new">new</a></h2>
 <p>This is the constructor. It does not accept any attributes.</p>
-<p>my $map = new SNMP::Map;</p>
+<pre>
+ my $map = new SNMP::Map;</pre>
 <p>
 </p>
 <h2><a name="get_data">get_data</a></h2>
 <p><code>get_data</code> method gets data from switches using SNMP protocol. It starts from the spanning tree root switch,
 and makes recursive calls to all switches linked to root. By default, it uses SNMP v3, but for switches
 listed in ipv2 array reference,it uses SNMP v2. If a failure occurs, method returns underfined value,
-you can use <a href="#error">the error manpage</a> to get error. At least, one ip adress must be specified by <strong>ipv2</strong> or <strong>ipv3</strong> attribute.
+you can use 'error' method to get error. At least, one ip adress must be specified by <strong>ipv2</strong> or <strong>ipv3</strong> attribute.
 It is recommended to get more info,  list all switches by <strong>ipv2</strong> and <strong>ipv3</strong> attributes. It was tested on
 'WS-C2950','WS-C2960','WS-3750' platforms. 'WS-C2950' switches must be listed in <strong>ipv2</strong>.</p>
 <p>Attributes:</p>
@@ -257,10 +258,11 @@ style of link. Could be: 'filled', 'solid', 'dashed', 'dotted', 'bold', 'invis'.
 <dd>
 file to output client-side/server-side image file. <strong>href</strong> parameter in the html tags 
 is the ip adress for hosts and number for links. You can change it to <strong>nohref</strong> and use
-<a href="#nodes_info">the nodes_info manpage</a> and <a href="#edge_info">the edge_info manpage</a> to create javascript pop up.
+'nodes_info' and 'edge_info' methods to create javascript pop up.
 </dd>
 <p></p></dl>
-<p>$map-&gt;get_output(file=&gt;'../map.jpg',
+<pre>
+ $map-&gt;get_output(file=&gt;'../map.jpg',
                  root_fillcolor=&gt;'blue',
                  root_fontcolor=&gt;'cyan',
                  fontcolor=&gt;'red',
@@ -271,7 +273,7 @@ is the ip adress for hosts and number for links. You can change it to <strong>no
                  width=&gt;9,
                  edge_style=&gt;'dashed',
                  cmap=&gt;'map'
-);</p>
+);</pre>
 <p>
 </p>
 <h2><a name="error">error</a></h2>
@@ -279,9 +281,9 @@ is the ip adress for hosts and number for links. You can change it to <strong>no
 <p>
 </p>
 <h2><a name="nodes_info">nodes_info</a></h2>
-<p>returns hash reference with information about host.To use this method you must call <a href="#get_data">the get_data manpage</a>
-first. Keys of the hash reference are the ip address of the hosts.The following information 
-could be obtained:</p>
+<p>returns hash reference with information about host.To use this method you must call 'get_data'
+method first. Keys of the hash reference are the ip address of the hosts.The following 
+information could be obtained:</p>
 <pre>
  $info = $map-&gt;nodes_info();
  print $info-&gt;{10.8.255.101}{deviceID};
@@ -293,9 +295,9 @@ could be obtained:</p>
 <p>
 </p>
 <h2><a name="edge_info">edge_info</a></h2>
-<p>take the number of the link as first parameter. To use this method you must call <a href="#get_data">the get_data manpage</a> 
-first.Number correspond to <strong>href</strong> parameter of the image map file of link. The following 
-information could be obtained:</p>
+<p>take the number of the link as first parameter. To use this method you must call 'get_data'
+method first.Number correspond to <strong>href</strong> parameter of the image map file of link. The 
+following information could be obtained:</p>
 <pre>
  $info = $map-&gt;edge_info(5);
  print $info-&gt;{from_ip};
@@ -308,7 +310,7 @@ information could be obtained:</p>
 </p>
 <hr />
 <h1><a name="notes">NOTES</a></h1>
-<p>Module was tested on 'WS-C2950','WS-C2960','WS-3750' platforms. <strong>ipv2</strong> option in <a href="#get_data">the get_data manpage</a> 
+<p>Module was tested on 'WS-C2950','WS-C2960','WS-3750' platforms. <strong>ipv2</strong> option in 'get_data' 
 method is used for WS-C2950.</p>
 <p>
 </p>

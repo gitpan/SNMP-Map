@@ -3,7 +3,7 @@ use ExtUtils::MakeMaker;
 
 print "Checking for SNMP, V5.2  ";
 $@ = '';
-eval "use SNMP 5.2 ();";
+eval "use Net::SNMP 5.2 ();";
 if ($@) {
     $ok = 0;
     print("\nYou don't have installed the SNMP module, version 5.2 or",
@@ -27,7 +27,7 @@ WriteMakefile(
     'NAME'              => 'SNMP::Map',
     'VERSION_FROM'      => 'Map.pm',
     'PREREQ_PM'         => {
-        'SNMP::Net' =>5.2,
+        'Net::SNMP' =>5.2,
         'GraphViz' => 2.04
     },
     dist        	=> { COMPRESS => "gzip", SUFFIX => "gz" },      

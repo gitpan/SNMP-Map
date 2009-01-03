@@ -4,13 +4,13 @@ SNMP::Map - Tool for drawing network map
 
 =head1 SYNOPSIS
  
-my $map = new SNMP::Map;
-$map->get_data(username=> 'user',
+ my $map = new SNMP::Map;
+ $map->get_data(username=> 'user',
                password =>'pass',
                ipv3 => ['10.8.255.238','10.8.255.239','10.8.255.244','10.8.255.248'],
                vlan=>'vlan-224'
-);
-$map->get_output(file => 'map.jpg');
+ );
+ $map->get_output(file => 'map.jpg');
 
 =head1 DESCRIPTION
 
@@ -26,14 +26,14 @@ javascript for popuping additional info.
 
 This is the constructor. It does not accept any attributes.
 
-my $map = new SNMP::Map;
+ my $map = new SNMP::Map;
 
 =head2 get_data
 
 C<get_data> method gets data from switches using SNMP protocol. It starts from the spanning tree root switch,
 and makes recursive calls to all switches linked to root. By default, it uses SNMP v3, but for switches
 listed in ipv2 array reference,it uses SNMP v2. If a failure occurs, method returns underfined value,
-you can use L<error> to get error. At least, one ip adress must be specified by B<ipv2> or B<ipv3> attribute.
+you can use 'error' method to get error. At least, one ip adress must be specified by B<ipv2> or B<ipv3> attribute.
 It is recommended to get more info,  list all switches by B<ipv2> and B<ipv3> attributes. It was tested on
 'WS-C2950','WS-C2960','WS-3750' platforms. 'WS-C2950' switches must be listed in B<ipv2>.
 
@@ -176,11 +176,11 @@ style of link. Could be: 'filled', 'solid', 'dashed', 'dotted', 'bold', 'invis'.
 
 file to output client-side/server-side image file. B<href> parameter in the html tags 
 is the ip adress for hosts and number for links. You can change it to B<nohref> and use
-L<nodes_info> and L<edge_info> to create javascript pop up.
+'nodes_info' and 'edge_info' methods to create javascript pop up.
 
 =back
 
-$map->get_output(file=>'../map.jpg',
+ $map->get_output(file=>'../map.jpg',
                  root_fillcolor=>'blue',
                  root_fontcolor=>'cyan',
                  fontcolor=>'red',
@@ -199,9 +199,9 @@ return last error message.
 
 =head2 nodes_info
 
-returns hash reference with information about host.To use this method you must call L<get_data>
-first. Keys of the hash reference are the ip address of the hosts.The following information 
-could be obtained:
+returns hash reference with information about host.To use this method you must call 'get_data'
+method first. Keys of the hash reference are the ip address of the hosts.The following 
+information could be obtained:
 
  $info = $map->nodes_info();
  print $info->{10.8.255.101}{deviceID};
@@ -213,9 +213,9 @@ could be obtained:
 
 =head2 edge_info
 
-take the number of the link as first parameter. To use this method you must call L<get_data> 
-first.Number correspond to B<href> parameter of the image map file of link. The following 
-information could be obtained:
+take the number of the link as first parameter. To use this method you must call 'get_data'
+method first.Number correspond to B<href> parameter of the image map file of link. The 
+following information could be obtained:
 
  $info = $map->edge_info(5);
  print $info->{from_ip};
@@ -228,7 +228,7 @@ information could be obtained:
 
 =head1 NOTES
 
-Module was tested on 'WS-C2950','WS-C2960','WS-3750' platforms. B<ipv2> option in L<get_data> 
+Module was tested on 'WS-C2950','WS-C2960','WS-3750' platforms. B<ipv2> option in 'get_data' 
 method is used for WS-C2950.
 
 =head1 AUTHOR
@@ -248,7 +248,7 @@ use warnings;
 use Net::SNMP;
 use GraphViz;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 my $ID1='1.3.6.1.2.1.17.2.5.0'; #to get RootID(priority and Mac Adress)
 my $ID2='1.3.6.1.2.1.2.2.1.6'; #to get STP Mac ID 2 IP
